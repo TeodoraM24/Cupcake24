@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Timezones</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="page">
+    <div class="form-container">
+        <h2>Indsæt boks med ordrer</h2>
+    </div>
+
+    <div>
+        <h3>Velkommen ombord</h3>
+        <p>Øens bedste cupcakes. Vælg og bestil her</p>
+
+        <div class="form-container1">
+            <form action="cupcake#" method="post">
+                <select name="cupcakebund" id="cupcakebund">
+                    <option disabled selected>Vælg bund</option>
+                    <option value="Test1">Test1</option>
+                    <option value="Test2">Test2</option>
+                </select>
+                <select name="cupcaketop" id="cupcaketop">
+                    <option disabled selected>Vælg top</option>
+                    <option value="TestTop1">TestTop1</option>
+                    <option value="TestTop2">TestTop2</option>
+                </select>
+                <select name="cupcakeantal" id="cupcakeantal">
+                    <option disabled selected>Vælg antal</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                <div class="last-row">
+                    <button type="submit">Læg i kurv</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

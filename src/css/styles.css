@@ -1,0 +1,47 @@
+.page {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    min-height: 100vh; /* Set minimum height to 100% of viewport height */
+    background-color: #f5f5f5; /* Set background color of the page */
+}
+
+.form-containers {
+    display: flex;
+    flex-direction: row; /* Align containers horizontally */
+    justify-content: center; /* Center containers horizontally */
+}
+
+.form-container,
+.form-container1 {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+    background-color: lightgrey; /* Set background color */
+    padding: 20px; /* Add padding for better readability */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    margin: 10px; /* Add margin between containers */
+}
+
+.form-container h2,
+.form-container1 h2 {
+    margin-top: 0; /* Remove margin from heading */
+}
+
+.form-container form,
+.form-container1 form {
+    display: flex;
+    flex-direction: row; /* Align items horizontally within the form */
+    padding: 10px 0; /* Adjust padding */
+}
+
+.last-row {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    margin-top: 10px; /* Adjust margin */
+}
+
+.last-row button {
+    margin-left: 10px; /* Adjust spacing between the button and the previous element */
+}
