@@ -1,3 +1,5 @@
+package entities;
+
 public class Order {
 
     private String productName; //mangler lige et godt navn. Det er til navnet på det man bestiller

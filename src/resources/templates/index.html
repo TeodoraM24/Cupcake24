@@ -5,7 +5,7 @@
     <title>Timezones</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -22,9 +22,10 @@
         <div class="form-container1">
             <form action="cupcake#" method="post">
                 <select name="cupcakebund" id="cupcakebund">
-                    <option disabled selected>Vælg bund</option>
-                    <option value="Test1">Test1</option>
-                    <option value="Test2">Test2</option>
+                    <option th:each="cupcake : ${cupcakes}"
+                            th:if="${cupcake.getCupcakepart() == 'Bottom'}"
+                    th:value="${cupcake.getDescription()}"
+                    th:text="${cupcake.getDescription()}"></option>
                 </select>
                 <select name="cupcaketop" id="cupcaketop">
                     <option disabled selected>Vælg top</option>
