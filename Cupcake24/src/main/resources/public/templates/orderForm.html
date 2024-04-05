@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cupcake Order Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+<div class="page">
+    <header>
+        <h1>Cupcake Order</h1>
+    </header>
+
+    <form class="generic-form" action="/order" method="post"> <!-- Updated form action -->
+        <label for="cupcake">Choose Cupcake:</label>
+        <select id="cupcake" name="cupcake">
+            <option value="1">Chocolate Bottom</option>
+            <option value="2">Vanilla Bottom</option>
+            <option value="3">Nutmeg Bottom</option>
+            <option value="4">Pistachio Bottom</option>
+            <option value="5">Almond Bottom</option>
+        </select>
+        <br><br>
+        <label for="topping">Choose Topping:</label>
+        <select id="topping" name="topping">
+            <option value="6">Chocolate Topping</option>
+            <option value="7">Blueberry Topping</option>
+            <option value="8">Raspberry Topping</option>
+            <option value="9">Crispy Topping</option>
+            <option value="10">Strawberry Topping</option>
+            <option value="11">Rum/Raisin Topping</option>
+            <option value="12">Orange Topping</option>
+            <option value="13">Lemon Topping</option>
+            <option value="14">Blue Cheese Topping</option>
+        </select>
+        <br><br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" min="1" max="10">
+        <br><br>
+        <button class="btn btn-ok" type="submit">Order</button>
+    </form>
+
+    <a href="orderForm.html" th:href="@{/}">Back to Homepage</a>
+</div>
+
+</body>
+
+</html>
