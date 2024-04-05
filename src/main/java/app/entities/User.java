@@ -5,17 +5,19 @@ public class User {
     private String name;
     private String password;
     private String email;
-    private int phone;
+    private String phone;
     private String role;
     private int bank;
+    private int user_id;
 
-    public User(String name, String password, String email, int phone, String role, int bank) {
+    public User(String name, String password, String email, String phone, String role, int bank, int user_id) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.role = role;
         this.bank = bank;
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -30,7 +32,7 @@ public class User {
         return email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -40,5 +42,22 @@ public class User {
 
     public int getBank() {
         return bank;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", role='" + role + '\'' +
+                ", bank=" + bank +
+                ", user_id=" + user_id +
+                '}';
     }
 }

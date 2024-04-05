@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/welcomepage.css" th:href="@{/css/welcomepage.css}" rel="stylesheet" >
+    <title>Velkommen</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html" th:href="@{/}">
+            <img src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}" alt="Cupcake Logo">
+        </a>
+        <h1>Velkommen til Olsker Cupcakes</h1>
+    </div>
+    <div class="content">
+        <p>Du har allerede en profil, log venligst ind</p>
+        <div class="options">
+            <form method="post">
+                <input type="text" name="username" placeholder="Enter username">
+                <input type="password" name="password" placeholder="Enter your password">
+                <button type="submit"  formaction="/login">Log ind</button>
+            </form>
+        </div>
+        <div><p th:text="${message}"></p></div>
+        <p>Tilmeld dig gratis</p>
+
+        <p><a href="createuser.html" th:href="@{/createuser}">Tilmeld dig</a></p>
+
+    </div>
+</div>
+</body>
+</html>
