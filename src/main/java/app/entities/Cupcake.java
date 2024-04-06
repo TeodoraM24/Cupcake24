@@ -10,6 +10,7 @@ public class Cupcake {
         this.description = description;
         this.cupcakepart = cupcakepart;
         this.price = price;
+        this.productcode = productcode;
     }
 
     public String getDescription() {
@@ -26,5 +27,15 @@ public class Cupcake {
 
     public int getProductcode() {
         return productcode;
+    }
+
+    @Override
+    public String toString() {
+        return "Cupcake{" +
+                "description='" + description + '\'' +
+                ", cupcakepart='" + cupcakepart + '\'' +
+                ", price=" + price +
+                ", productcode=" + productcode +
+                '}';
     }
 }
