@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" >
+    <title>AdminMain</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html" th:href="@{/}">   <!-- skal ændres eller slettes -->
+            <img src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}" alt="Cupcake Logo">
+        </a>
+        <h1>Klik nedenfor for at se alle ordrer</h1>
+    </div>
+    <div class="content">
+        <a href="#showAllOrders">Vis alle ordrer</a>
+
+       </div>
+</div>
+</body>
+</html>
