@@ -26,26 +26,8 @@ public class Main {
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
-        CupcakeMapper cupcakeMapper = new CupcakeMapper(connectionPool);
 
-        try {
-            System.out.println(cupcakeMapper.getAllCupcakes().size());
-        } catch (DatabaseException e) {
-            throw new RuntimeException(e);
-        }/*
-        app.get("/", ctx -> {
-            ctx.attribute("cupcakes", cupcakeMapper.getAllCupcakes()); // Tilføjer listen til javalin så den kan bruges på hjemmesiden
-            ctx.render("WelcomePage.html");
-        });*/
-
-        app.get("/", ctx -> {
-            List<Cupcake> cupcakes = cupcakeMapper.getAllCupcakes();
-            System.out.println("Number of cupcakes retrieved: " + cupcakes.size());
-            ctx.attribute("cupcakes", cupcakes);
-            ctx.render("WelcomePage.html");
-        });
-
+        app.get("/", ctx -> ctx.render("WelcomePage.html"));
         UserController.addRoutes(app, connectionPool);
-
     }
 }

@@ -11,6 +11,8 @@ import io.javalin.http.Context;
 
 import java.util.List;
 
+import static app.persistence.OrderMapper.addToBasket;
+
 public class UserController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)
@@ -20,9 +22,48 @@ public class UserController {
         app.get("login", ctx -> ctx.render("login.html"));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
+        app.get("orderForm", ctx -> showOrderForm(ctx, connectionPool));
+        app.post("/order", ctx -> buyCupcake(ctx, connectionPool));
     }
 
-    private static void showOrderForm(Context ctx, ConnectionPool connectionPool) { //Laver listen cupcakes, det indenholder cupcakes
+    private static void buyCupcake(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");// Retrieve the current user (you may need to implement this)
+        String cupcakeDescription = ctx.formParam("bottom");
+        String toppingDescription = ctx.formParam("topping");
+        int quantity = Integer.parseInt(ctx.formParam("amount"));
+
+        try {
+            List<Cupcake> cupcakes = getCupcakes(connectionPool); //Henter listen af cupcakes
+
+
+            Cupcake bottom = getCupcakeByDescription(cupcakeDescription, cupcakes); //Henter info om cupcaken ud fra deres description
+            Cupcake topping = getCupcakeByDescription(toppingDescription, cupcakes);
+
+            addToBasket(connectionPool, user, bottom, topping, quantity);
+
+            ctx.render("/orderForm.html");
+        } catch (Exception e) {
+
+            ctx.render("error.html"); //Test side, skal lige ændres tilbage til orderForm.html med en fejl besked
+        }
+    }
+
+    private static List<Cupcake> getCupcakes(ConnectionPool connectionPool) throws DatabaseException {
+        CupcakeMapper cupcakeMapper = new CupcakeMapper(connectionPool);
+        return cupcakeMapper.getAllCupcakes();
+    }
+
+    private static Cupcake getCupcakeByDescription(String description, List<Cupcake> cupcakes) throws DatabaseException {
+        for (Cupcake cupcake : cupcakes) {
+            if (cupcake.getDescription().equalsIgnoreCase(description)) {
+                return cupcake;
+            }
+        }
+        throw new DatabaseException("Cupcake not found with description: " + description);
+    }
+
+
+    private static void showOrderForm(Context ctx, ConnectionPool connectionPool) { //Laver listen cupcakes
         CupcakeMapper cupcakeMapper = new CupcakeMapper(connectionPool);
         try {
             List<Cupcake> cupcakes = cupcakeMapper.getAllCupcakes();
@@ -72,6 +113,7 @@ public class UserController {
 
         try {
             User user = UserMapper.login(name, password,connectionPool);
+            ctx.sessionAttribute("currentUser", user);
             ctx.render("orderForm.html"); //skal ændres til den rigtige hjemmeside man logger ind på
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());

@@ -2,23 +2,15 @@ package app.entities;
 
 public class Order {
 
-    private String productName; //mangler lige et godt navn. Det er til navnet på det man bestiller
-    private int price; //pris på ordren
+    private String productDescription;
     private int orderid; //id'en
 
-    public Order(String productName, int price, int orderid) {
-        this.productName = productName;
-        this.price = price;
+    public Order(String productDescription, int orderid) {
+        this.productDescription = productDescription;
         this.orderid = orderid;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public int getPrice() {
-        return price;
-    }
+    public String getProductDescription() { return productDescription; }
 
     public int getOrderid() {
         return orderid;

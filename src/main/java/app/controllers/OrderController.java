@@ -7,7 +7,7 @@ import app.persistence.ConnectionPool;
 import app.persistence.OrderMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-
+/*
 public class OrderController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
@@ -52,4 +52,4 @@ public class OrderController {
     private static int calculateTotalPrice(int price, int quantity) {
         return price * quantity;
     }
-}
+}*/

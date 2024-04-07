@@ -14,24 +14,36 @@ import java.util.List;
 
 public class OrderMapper {
 
-    public static void addToBasket(ConnectionPool connectionPool, User user, Cupcake cupcake, int quantity, int totalPrice) throws DatabaseException {
-        String sql = "INSERT INTO cupcakeschema.orderdetails (productcode, quantityorder, pricheach, user_id) " +
-                "VALUES (?, ?, ?, ?)";
+    public static void addToBasket(ConnectionPool connectionPool, User user, Cupcake bottom, Cupcake topping, int quantity) throws DatabaseException {
+
+        String sql = "INSERT INTO cupcakeschema.orderdetails (productcode_bot, productcode_top, quantityorder, price, user_id) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            //Har fjernet ordernumber da DB selv laver et unikt nummer
-            ps.setInt(1, cupcake.getProductcode());
-            ps.setInt(2, quantity);
-            ps.setInt(3, cupcake.getPrice());
-            ps.setInt(4, user.getUser_id());
+            System.out.println("user: "+user.getUser_id());
+
+            int totalPrice = (bottom.getPrice() + topping.getPrice()) * quantity;
+
+            ps.setInt(1, bottom.getProductcode());
+            System.out.println("bot_code: "+bottom.getProductcode());
+            ps.setInt(2, topping.getProductcode());
+            System.out.println("top_code: "+topping.getProductcode());
+            ps.setInt(3, quantity);
+            System.out.println("quantity: "+quantity);
+            ps.setInt(4, totalPrice);
+            System.out.println("total_price: "+totalPrice);
+            ps.setInt(5, user.getUser_id());
+            System.out.println("user_id: "+user.getUser_id());
+
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
                 throw new DatabaseException("Failed to add order to basket");
             }
         } catch (SQLException e) {
+            System.err.println("SQL Error occurred while adding order to basket: " + e.getMessage());
             throw new DatabaseException("Error adding order to basket", e.getMessage());
         }
     }

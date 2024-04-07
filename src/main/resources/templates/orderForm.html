@@ -15,17 +15,10 @@
         <h1>Cupcake Order</h1>
     </header>
 
-    <!-- Debug output -->
-    <div th:if="${#lists.isEmpty(cupcakes)}">
-        <p>No cupcakes found!</p>
-    </div>
-    <div th:unless="${#lists.isEmpty(cupcakes)}">
-        <p>Cupcakes found! Count: <span th:text="${cupcakes.size()}"></span></p>
-    </div>
 
-    <form class="generic-form" action="/order" method="post"> <!-- Updated form action -->
-        <label for="cupcake">Choose Cupcake:</label>
-        <select id="cupcake" name="cupcake">
+    <form class="generic-form" action="/order" method="post">
+        <label for="bottom">Choose Cupcake:</label>
+        <select id="bottom" name="bottom">
             <option value="" disabled selected>Vælg cupcake type</option>
             <option th:each="cupcake : ${cupcakes}" th:if="${cupcake.getCupcakepart() == 'Bottom'}" th:value="${cupcake.getDescription()}" th:text="${cupcake.getDescription()}"></option>
         </select>
@@ -37,6 +30,7 @@
             <option th:each="cupcake : ${cupcakes}" th:if="${cupcake.getCupcakepart() == 'Topping'}" th:value="${cupcake.getDescription()}" th:text="${cupcake.getDescription()}"></option>
         </select>
         <br><br>
+
         <label for="amount">Amount:</label>
         <input type="number" id="amount" name="amount" min="1" max="10">
         <br><br>
