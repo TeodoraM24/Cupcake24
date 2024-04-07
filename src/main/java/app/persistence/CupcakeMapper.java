@@ -27,7 +27,7 @@ public class CupcakeMapper {
                 String description = resultSet.getString("description");
                 int price = resultSet.getInt("price");
                 int productcode = resultSet.getInt("productcode");
-                Cupcake cupcake = new Cupcake(description, "Buttom", price, productcode);
+                Cupcake cupcake = new Cupcake(description, "Bottom", price, productcode);
                 cupcakes.add(cupcake);
             }
 

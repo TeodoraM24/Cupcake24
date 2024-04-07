@@ -27,12 +27,13 @@
         <label for="cupcake">Choose Cupcake:</label>
         <select id="cupcake" name="cupcake">
             <option value="" disabled selected>Vælg cupcake type</option>
-            <option th:each="cupcake : ${cupcakes}" th:value="${cupcake.getDescription()}" th:text="${cupcake.getDescription()}"></option>
+            <option th:each="cupcake : ${cupcakes}" th:if="${cupcake.getCupcakepart() == 'Bottom'}" th:value="${cupcake.getDescription()}" th:text="${cupcake.getDescription()}"></option>
         </select>
 
         <br><br>
         <label for="topping">Choose Topping:</label>
         <select id="topping" name="topping">
+            <option value="" disabled selected>Vælg topping</option>
             <option th:each="cupcake : ${cupcakes}" th:if="${cupcake.getCupcakepart() == 'Topping'}" th:value="${cupcake.getDescription()}" th:text="${cupcake.getDescription()}"></option>
         </select>
         <br><br>
