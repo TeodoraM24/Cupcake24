@@ -25,7 +25,7 @@ public class UserController {
         app.get("orderForm", ctx -> showOrderForm(ctx, connectionPool));
         app.post("/order", ctx -> buyCupcake(ctx, connectionPool));
         app.get("customerpage", ctx -> ctx.render("customerpage.html"));
-        app.get("customerpage", ctx -> getOrders(ctx, connectionPool));
+        //app.get("customerpage", ctx -> getOrders(ctx, connectionPool));
     }
 
     private static void buyCupcake(Context ctx, ConnectionPool connectionPool) {
