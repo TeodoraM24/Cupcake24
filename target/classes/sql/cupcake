@@ -1,0 +1,431 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.2
+-- Dumped by pg_dump version 16.2
+
+-- Started on 2024-04-07 17:02:21
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 5 (class 2615 OID 2200)
+-- Name: cupcakeschema; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA cupcakeschema;
+
+
+ALTER SCHEMA cupcakeschema OWNER TO pg_database_owner;
+
+--
+-- TOC entry 4827 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: SCHEMA cupcakeschema; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA cupcakeschema IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 222 (class 1259 OID 41469)
+-- Name: basket; Type: TABLE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE TABLE cupcakeschema.basket (
+    productcode_top integer NOT NULL,
+    productcode_bot integer NOT NULL,
+    quantityorder integer NOT NULL,
+    price integer NOT NULL,
+    user_id integer NOT NULL,
+    basket_id integer NOT NULL
+);
+
+
+ALTER TABLE cupcakeschema.basket OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 41472)
+-- Name: basket_basket_id_seq; Type: SEQUENCE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE SEQUENCE cupcakeschema.basket_basket_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE cupcakeschema.basket_basket_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4828 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: basket_basket_id_seq; Type: SEQUENCE OWNED BY; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER SEQUENCE cupcakeschema.basket_basket_id_seq OWNED BY cupcakeschema.basket.basket_id;
+
+
+--
+-- TOC entry 215 (class 1259 OID 41279)
+-- Name: cupcake; Type: TABLE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE TABLE cupcakeschema.cupcake (
+    price integer NOT NULL,
+    description character varying(100) NOT NULL,
+    cupcakepart character varying(10) NOT NULL,
+    productcode integer NOT NULL
+);
+
+
+ALTER TABLE cupcakeschema.cupcake OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 41326)
+-- Name: cupcake_productcode_seq; Type: SEQUENCE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE SEQUENCE cupcakeschema.cupcake_productcode_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE cupcakeschema.cupcake_productcode_seq OWNER TO postgres;
+
+--
+-- TOC entry 4829 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: cupcake_productcode_seq; Type: SEQUENCE OWNED BY; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER SEQUENCE cupcakeschema.cupcake_productcode_seq OWNED BY cupcakeschema.cupcake.productcode;
+
+
+--
+-- TOC entry 216 (class 1259 OID 41282)
+-- Name: order; Type: TABLE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE TABLE cupcakeschema."order" (
+    user_id integer NOT NULL,
+    ordernumber integer NOT NULL
+);
+
+
+ALTER TABLE cupcakeschema."order" OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 41285)
+-- Name: orderdetails; Type: TABLE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE TABLE cupcakeschema.orderdetails (
+    productcode_top integer NOT NULL,
+    quantityorder integer NOT NULL,
+    price integer NOT NULL,
+    user_id integer NOT NULL,
+    productcode_bot integer NOT NULL,
+    ordernumber integer NOT NULL
+);
+
+
+ALTER TABLE cupcakeschema.orderdetails OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 41452)
+-- Name: orderdetails_ordernumber_seq; Type: SEQUENCE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE SEQUENCE cupcakeschema.orderdetails_ordernumber_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE cupcakeschema.orderdetails_ordernumber_seq OWNER TO postgres;
+
+--
+-- TOC entry 4830 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: orderdetails_ordernumber_seq; Type: SEQUENCE OWNED BY; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER SEQUENCE cupcakeschema.orderdetails_ordernumber_seq OWNED BY cupcakeschema.orderdetails.ordernumber;
+
+
+--
+-- TOC entry 219 (class 1259 OID 41289)
+-- Name: users; Type: TABLE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE TABLE cupcakeschema.users (
+    user_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    password character varying(50) NOT NULL,
+    email character varying(50) NOT NULL,
+    role character varying(50) DEFAULT 'customer'::character varying NOT NULL,
+    bank integer DEFAULT 0 NOT NULL,
+    phone character varying(20)
+);
+
+
+ALTER TABLE cupcakeschema.users OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 41288)
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: cupcakeschema; Owner: postgres
+--
+
+CREATE SEQUENCE cupcakeschema.users_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE cupcakeschema.users_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4831 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER SEQUENCE cupcakeschema.users_user_id_seq OWNED BY cupcakeschema.users.user_id;
+
+
+--
+-- TOC entry 4658 (class 2604 OID 41473)
+-- Name: basket basket_id; Type: DEFAULT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.basket ALTER COLUMN basket_id SET DEFAULT nextval('cupcakeschema.basket_basket_id_seq'::regclass);
+
+
+--
+-- TOC entry 4653 (class 2604 OID 41327)
+-- Name: cupcake productcode; Type: DEFAULT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.cupcake ALTER COLUMN productcode SET DEFAULT nextval('cupcakeschema.cupcake_productcode_seq'::regclass);
+
+
+--
+-- TOC entry 4654 (class 2604 OID 41453)
+-- Name: orderdetails ordernumber; Type: DEFAULT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.orderdetails ALTER COLUMN ordernumber SET DEFAULT nextval('cupcakeschema.orderdetails_ordernumber_seq'::regclass);
+
+
+--
+-- TOC entry 4655 (class 2604 OID 41292)
+-- Name: users user_id; Type: DEFAULT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.users ALTER COLUMN user_id SET DEFAULT nextval('cupcakeschema.users_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 4820 (class 0 OID 41469)
+-- Dependencies: 222
+-- Data for Name: basket; Type: TABLE DATA; Schema: cupcakeschema; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4813 (class 0 OID 41279)
+-- Dependencies: 215
+-- Data for Name: cupcake; Type: TABLE DATA; Schema: cupcakeschema; Owner: postgres
+--
+
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (5, 'Chocolate', 'Bottom', 1);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (5, 'Vanilla', 'Bottom', 2);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (5, 'Nutmeg', 'Bottom', 3);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (6, 'Pistacio', 'Bottom', 4);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (7, 'Almond', 'Bottom', 5);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (5, 'Chocolate', 'Topping', 6);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (5, 'Blueberry', 'Topping', 7);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (5, 'Rasberry', 'Topping', 8);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (6, ' Crispy', 'Topping', 9);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (6, 'Strawberry', 'Topping', 10);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (7, 'Rum/Raisin', 'Topping', 11);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (8, 'Orange', 'Topping', 12);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (8, 'Lemon', 'Topping', 13);
+INSERT INTO cupcakeschema.cupcake (price, description, cupcakepart, productcode) VALUES (9, 'Blue cheese', 'Topping', 14);
+
+
+--
+-- TOC entry 4814 (class 0 OID 41282)
+-- Dependencies: 216
+-- Data for Name: order; Type: TABLE DATA; Schema: cupcakeschema; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4815 (class 0 OID 41285)
+-- Dependencies: 217
+-- Data for Name: orderdetails; Type: TABLE DATA; Schema: cupcakeschema; Owner: postgres
+--
+
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (7, 2, 20, 4, 2, 1);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (12, 2, 26, 4, 1, 2);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (7, 2, 20, 4, 2, 3);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (10, 3, 33, 1, 1, 4);
+
+
+--
+-- TOC entry 4817 (class 0 OID 41289)
+-- Dependencies: 219
+-- Data for Name: users; Type: TABLE DATA; Schema: cupcakeschema; Owner: postgres
+--
+
+INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (1, 'admin', '1234', 'admin@mail.dk', 'Admin', 0, NULL);
+INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (2, 'Morten hvor blev du af', '1234', 'morten@væk', 'customer', 0, '');
+INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (3, 'bingo', '1234', 'bingo@mail.dk', 'customer', 0, '12345678');
+INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (4, 'tobi', '1234', 'tobi@mail.dk', 'customer', 0, '51356052');
+
+
+--
+-- TOC entry 4832 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: basket_basket_id_seq; Type: SEQUENCE SET; Schema: cupcakeschema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cupcakeschema.basket_basket_id_seq', 1, false);
+
+
+--
+-- TOC entry 4833 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: cupcake_productcode_seq; Type: SEQUENCE SET; Schema: cupcakeschema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cupcakeschema.cupcake_productcode_seq', 14, true);
+
+
+--
+-- TOC entry 4834 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: orderdetails_ordernumber_seq; Type: SEQUENCE SET; Schema: cupcakeschema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cupcakeschema.orderdetails_ordernumber_seq', 4, true);
+
+
+--
+-- TOC entry 4835 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: cupcakeschema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cupcakeschema.users_user_id_seq', 4, true);
+
+
+--
+-- TOC entry 4660 (class 2606 OID 41332)
+-- Name: cupcake cupcake_pkey; Type: CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.cupcake
+    ADD CONSTRAINT cupcake_pkey PRIMARY KEY (productcode);
+
+
+--
+-- TOC entry 4662 (class 2606 OID 41463)
+-- Name: orderdetails orderdetails_pkey; Type: CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.orderdetails
+    ADD CONSTRAINT orderdetails_pkey PRIMARY KEY (ordernumber);
+
+
+--
+-- TOC entry 4664 (class 2606 OID 41294)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 4667 (class 2606 OID 41443)
+-- Name: orderdetails fk_orderdetails_cupcake_bot_productcode; Type: FK CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.orderdetails
+    ADD CONSTRAINT fk_orderdetails_cupcake_bot_productcode FOREIGN KEY (productcode_bot) REFERENCES cupcakeschema.cupcake(productcode) NOT VALID;
+
+
+--
+-- TOC entry 4668 (class 2606 OID 41333)
+-- Name: orderdetails fk_orderdetails_cupcake_productcode; Type: FK CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.orderdetails
+    ADD CONSTRAINT fk_orderdetails_cupcake_productcode FOREIGN KEY (productcode_top) REFERENCES cupcakeschema.cupcake(productcode) NOT VALID;
+
+
+--
+-- TOC entry 4669 (class 2606 OID 41316)
+-- Name: orderdetails fk_orderdetails_user_id; Type: FK CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema.orderdetails
+    ADD CONSTRAINT fk_orderdetails_user_id FOREIGN KEY (user_id) REFERENCES cupcakeschema.users(user_id) NOT VALID;
+
+
+--
+-- TOC entry 4665 (class 2606 OID 41464)
+-- Name: order fk_ordernumber_orderdetails; Type: FK CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema."order"
+    ADD CONSTRAINT fk_ordernumber_orderdetails FOREIGN KEY (ordernumber) REFERENCES cupcakeschema.orderdetails(ordernumber) NOT VALID;
+
+
+--
+-- TOC entry 4666 (class 2606 OID 41295)
+-- Name: order fk_user_order_id; Type: FK CONSTRAINT; Schema: cupcakeschema; Owner: postgres
+--
+
+ALTER TABLE ONLY cupcakeschema."order"
+    ADD CONSTRAINT fk_user_order_id FOREIGN KEY (user_id) REFERENCES cupcakeschema.users(user_id) NOT VALID;
+
+
+-- Completed on 2024-04-07 17:02:22
+
+--
+-- PostgreSQL database dump complete
+--
+
