@@ -8,10 +8,10 @@ import io.javalin.http.Context;
 public class AdminController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        app.get("/admin", ctx -> ctx.render("admin.html")); // Endpoint for admin dashboard
-        app.post("/admin/deposit", ctx -> depositFunds(ctx, connectionPool)); // Endpoint for depositing funds
-        app.post("/admin/removeOrder", ctx -> removeOrder(ctx, connectionPool)); // Endpoint for removing orders
-        // Add more routes as needed
+        app.get("/admin", ctx -> ctx.render("admin.html"));
+        app.post("/admin/deposit", ctx -> depositFunds(ctx, connectionPool));
+        app.post("/admin/removeOrder", ctx -> removeOrder(ctx, connectionPool));
+
     }
 
     private static void depositFunds(Context ctx, ConnectionPool connectionPool) {
@@ -21,7 +21,7 @@ public class AdminController {
             return;
         }
 
-        // Get form parameters
+
         int customerId = Integer.parseInt(ctx.formParam("customerId"));
         double amount = Double.parseDouble(ctx.formParam("amount"));
 
@@ -41,7 +41,7 @@ public class AdminController {
             return;
         }
 
-        // Get form parameter
+
         int orderId = Integer.parseInt(ctx.formParam("orderId"));
 
         try {
@@ -53,5 +53,4 @@ public class AdminController {
         }
     }
 
-    // Add more methods for other admin actions as needed
 }
