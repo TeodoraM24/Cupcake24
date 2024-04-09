@@ -15,6 +15,8 @@
         <h1>Cupcake Order</h1>
     </header>
 
+    <p><a href="customerpage.html" th:text="${session.currentUser.email}" th:href="customerpage"></a></p>
+
 
     <form class="generic-form" action="/order" method="post">
         <label for="bottom">Choose Cupcake:</label>

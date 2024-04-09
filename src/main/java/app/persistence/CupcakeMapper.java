@@ -48,4 +48,19 @@ public class CupcakeMapper {
         return cupcakes;
     }
 
+    public List<Cupcake> getOrderedCupcakes() throws DatabaseException {
+        List<Cupcake> cupcakes = new ArrayList<>();
+
+        String sql = "SELECT * FROM cupcakeschema.orderdetails WHERE user_id = ?";
+
+        try(Connection connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Database error occurred at orderdetails table", e.getMessage());
+        }
+
+        return cupcakes;
+    }
+
 }

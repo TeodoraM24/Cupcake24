@@ -24,6 +24,8 @@ public class UserController {
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
         app.get("orderForm", ctx -> showOrderForm(ctx, connectionPool));
         app.post("/order", ctx -> buyCupcake(ctx, connectionPool));
+        app.get("customerpage", ctx -> ctx.render("customerpage.html"));
+        app.get("customerpage", ctx -> getOrders(ctx, connectionPool));
     }
 
     private static void buyCupcake(Context ctx, ConnectionPool connectionPool) {
@@ -48,6 +50,7 @@ public class UserController {
         }
     }
 
+
     private static List<Cupcake> getCupcakes(ConnectionPool connectionPool) throws DatabaseException {
         CupcakeMapper cupcakeMapper = new CupcakeMapper(connectionPool);
         return cupcakeMapper.getAllCupcakes();
@@ -60,6 +63,11 @@ public class UserController {
             }
         }
         throw new DatabaseException("Cupcake not found with description: " + description);
+    }
+
+    private static List<Cupcake> getOrders(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
+        CupcakeMapper cupcakeMapper = new CupcakeMapper(connectionPool);
+        return cupcakeMapper.getOrderedCupcakes();
     }
 
 
@@ -111,9 +119,15 @@ public class UserController {
 
         showOrderForm(ctx, connectionPool); //Kalder metoden for at lave listen over cupcakes der skal bruges
 
+
         try {
             User user = UserMapper.login(name, password,connectionPool);
             ctx.sessionAttribute("currentUser", user);
+
+            List<Cupcake> cupcakes = getCupcakes(connectionPool);
+            ctx.attribute("cupcakes", cupcakes);
+
+
             ctx.render("orderForm.html"); //skal ændres til den rigtige hjemmeside man logger ind på
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());

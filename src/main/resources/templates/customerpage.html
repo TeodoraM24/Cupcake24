@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/welcomepage.css" th:href="@{/css/welcomepage.css}" rel="stylesheet" >
+    <title>Velkommen</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="createuser.html" th:href="@{/createuser}">
+            <img src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}" alt="Cupcake Logo">
+        </a>
+        <h1>Velkommen til Olsker Cupcakes</h1>
+
+        <div>
+            <p><label>Navn:</label><br></p>
+            <p th:text="${session.currentUser.name}"></p>
+            <p><label>Email:</label></p>
+            <p th:text="${session.currentUser.email}"></p>
+            <p><label th:if="${session.currentUser.phone != null}">Telefonnummer:</label></p>
+            <p th:if="${session.currentUser.phone != null}" th:text="${session.currentUser.phone}"></p>
+            <p><label>Konto:</label></p>
+            <p th:text="${session.currentUser.bank}"></p>
+        </div><br><br>
+
+        <div>
+            <p><label>Ordre:</label></p>
+                <p>
+                    <span th:each="cupcake : ${cupcakes}" th:text="${cupcake.getDescription()} + ', '"></span>
+                </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
