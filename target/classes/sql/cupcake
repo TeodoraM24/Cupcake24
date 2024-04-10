@@ -5,7 +5,7 @@
 -- Dumped from database version 16.2
 -- Dumped by pg_dump version 16.2
 
--- Started on 2024-04-07 17:02:21
+-- Started on 2024-04-09 14:50:00
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -301,6 +301,10 @@ INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, u
 INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (12, 2, 26, 4, 1, 2);
 INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (7, 2, 20, 4, 2, 3);
 INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (10, 3, 33, 1, 1, 4);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (8, 4, 44, 4, 4, 5);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (7, 3, 30, 4, 2, 6);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (13, 2, 30, 4, 5, 7);
+INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, user_id, productcode_bot, ordernumber) VALUES (8, 10, 100, 4, 2, 8);
 
 
 --
@@ -312,7 +316,7 @@ INSERT INTO cupcakeschema.orderdetails (productcode_top, quantityorder, price, u
 INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (1, 'admin', '1234', 'admin@mail.dk', 'Admin', 0, NULL);
 INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (2, 'Morten hvor blev du af', '1234', 'morten@væk', 'customer', 0, '');
 INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (3, 'bingo', '1234', 'bingo@mail.dk', 'customer', 0, '12345678');
-INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (4, 'tobi', '1234', 'tobi@mail.dk', 'customer', 0, '51356052');
+INSERT INTO cupcakeschema.users (user_id, name, password, email, role, bank, phone) VALUES (4, 'tobi', '1234', 'tobi@mail.dk', 'customer', 500, '51356052');
 
 
 --
@@ -339,7 +343,7 @@ SELECT pg_catalog.setval('cupcakeschema.cupcake_productcode_seq', 14, true);
 -- Name: orderdetails_ordernumber_seq; Type: SEQUENCE SET; Schema: cupcakeschema; Owner: postgres
 --
 
-SELECT pg_catalog.setval('cupcakeschema.orderdetails_ordernumber_seq', 4, true);
+SELECT pg_catalog.setval('cupcakeschema.orderdetails_ordernumber_seq', 8, true);
 
 
 --
@@ -423,9 +427,8 @@ ALTER TABLE ONLY cupcakeschema."order"
     ADD CONSTRAINT fk_user_order_id FOREIGN KEY (user_id) REFERENCES cupcakeschema.users(user_id) NOT VALID;
 
 
--- Completed on 2024-04-07 17:02:22
+-- Completed on 2024-04-09 14:50:00
 
 --
 -- PostgreSQL database dump complete
 --
-

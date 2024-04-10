@@ -22,21 +22,13 @@ public class OrderMapper {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            System.out.println("user: "+user.getUser_id());
-
             int totalPrice = (bottom.getPrice() + topping.getPrice()) * quantity;
 
             ps.setInt(1, bottom.getProductcode());
-            System.out.println("bot_code: "+bottom.getProductcode());
             ps.setInt(2, topping.getProductcode());
-            System.out.println("top_code: "+topping.getProductcode());
             ps.setInt(3, quantity);
-            System.out.println("quantity: "+quantity);
             ps.setInt(4, totalPrice);
-            System.out.println("total_price: "+totalPrice);
             ps.setInt(5, user.getUser_id());
-            System.out.println("user_id: "+user.getUser_id());
-
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {

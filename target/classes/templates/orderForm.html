@@ -12,7 +12,9 @@
 
 <div class="page">
     <header>
+        <img src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}" alt="Cupcake Logo">
         <h1>Cupcake Order</h1>
+
     </header>
 
     <p><a href="customerpage.html" th:text="${session.currentUser.email}" th:href="customerpage"></a></p>
