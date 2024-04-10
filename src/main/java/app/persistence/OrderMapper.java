@@ -39,10 +39,10 @@ public class OrderMapper {
             throw new DatabaseException("Error adding order to basket", e.getMessage());
         }
     }
-/*
+
     public static List<Order> getPreviousOrders(ConnectionPool connectionPool, User user) throws DatabaseException {
         List<Order> previousOrders = new ArrayList<>();
-        String sql = "SELECT od.ordernumber, od.productcode, od.quantityorder, od.pricheach " +
+        String sql = "SELECT od.ordernumber, od.productcode, od.quantityorder, od.prich " +
                 "FROM cupcakeschema.orderdetails od " +
                 "JOIN cupcakeschema.\"order\" o ON od.ordernumber = o.ordernumber " +
                 "WHERE o.user_id = ?";
@@ -53,14 +53,15 @@ public class OrderMapper {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int orderNumber = rs.getInt("ordernumber");
+                String orderNumber = rs.getString("ordernumber");
                 int productCode = rs.getInt("productcode");
                 int quantity = rs.getInt("quantityorder");
                 int priceEach = rs.getInt("pricheach");
+                int totalPrice = priceEach * quantity;
 
                 // details here using productCode
                 // object + add to the list
-                Order order = new Order(orderNumber, null, priceEach, productCode, quantity);
+                Order order = new Order(orderNumber, priceEach, totalPrice, productCode, quantity);
                 previousOrders.add(order);
             }
         } catch (SQLException e) {
@@ -68,11 +69,6 @@ public class OrderMapper {
         }
 
         return previousOrders;
-    }*/
-
-    //  unique order number
-    private static int generateOrderNumber() {
-
-        return 0;
     }
+
 }

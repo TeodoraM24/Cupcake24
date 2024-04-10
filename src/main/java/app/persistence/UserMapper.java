@@ -8,23 +8,23 @@ import java.sql.*;
 public class UserMapper
 {
 
-    public static User login(String name, String password, ConnectionPool connectionPool) throws DatabaseException
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "select * from users where name=? and password=?";
+        String sql = "select * from users where email=? and password=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         )
         {
-            ps.setString(1, name);
+            ps.setString(1, email);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next())
             {
                 int user_id = rs.getInt("user_id");
-                String email = rs.getString("email");
+                String name = rs.getString("name");
                 String phone = rs.getString("phone");
                 String role = rs.getString("role");
                 int bank = rs.getInt("bank");
